@@ -1,8 +1,30 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.PaymentGateway.Core", "src\Checkout.PaymentGateway.Core\Checkout.PaymentGateway.Core.csproj", "{881E47FA-C7AE-4877-BD09-18E1C585A737}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0BAF11C9-A3CE-4E96-9E32-23A3DB350F32}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{922FD879-F41F-4A14-9B97-AB09FCFF2D2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.PaymentGateway.Core.Tests", "tests\Checkout.PaymentGateway.Core.Tests\Checkout.PaymentGateway.Core.Tests.csproj", "{D40679ED-0110-4DAC-A33E-A49A8F293F1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{881E47FA-C7AE-4877-BD09-18E1C585A737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{881E47FA-C7AE-4877-BD09-18E1C585A737}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{881E47FA-C7AE-4877-BD09-18E1C585A737}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{881E47FA-C7AE-4877-BD09-18E1C585A737}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D40679ED-0110-4DAC-A33E-A49A8F293F1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D40679ED-0110-4DAC-A33E-A49A8F293F1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D40679ED-0110-4DAC-A33E-A49A8F293F1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D40679ED-0110-4DAC-A33E-A49A8F293F1E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{881E47FA-C7AE-4877-BD09-18E1C585A737} = {0BAF11C9-A3CE-4E96-9E32-23A3DB350F32}
+		{D40679ED-0110-4DAC-A33E-A49A8F293F1E} = {922FD879-F41F-4A14-9B97-AB09FCFF2D2A}
 	EndGlobalSection
 EndGlobal
