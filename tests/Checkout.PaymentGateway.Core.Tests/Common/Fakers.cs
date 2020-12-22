@@ -68,7 +68,9 @@ namespace Checkout.PaymentGateway.Core.Tests.Common
 
         public static Faker<Merchant> Merchant { get; } =
             new Faker<Merchant>()
-                .RuleFor(f => f.PaymentStatusCallbackUrl, f => f.Internet.Url())
+                .RuleFor(f => f.CallbackApiUrl, f => f.Internet.Url())
+                .RuleFor(f => f.CallbackApiPassword, f => f.Internet.Password())
+                .RuleFor(f => f.CallbackApiUsername, f => f.Internet.UserName())
                 .RuleFor(f => f.Id, f => Guid.NewGuid());
     }
 }

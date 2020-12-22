@@ -18,7 +18,9 @@ namespace Checkout.PaymentGateway.Infrastructure.Repositories
                 Id = domainModel.Id,
                 Timestamp = domainModel.Timestamp as byte[],
                 ApiKeyId = domainModel.ApiKeyId,
-                PaymentStatusCallbackUrl = domainModel.PaymentStatusCallbackUrl
+                CallbackApiUrl = domainModel.CallbackApiUrl,
+                CallbackApiPassword = domainModel.CallbackApiPassword,
+                CallbackApiUsername = domainModel.CallbackApiUsername,
             };
         }
 
@@ -29,7 +31,9 @@ namespace Checkout.PaymentGateway.Infrastructure.Repositories
                 Id = dataModel.Id,
                 Timestamp = dataModel.Timestamp,
                 ApiKeyId = dataModel.ApiKeyId,
-                PaymentStatusCallbackUrl = dataModel.PaymentStatusCallbackUrl
+                CallbackApiUrl = dataModel.CallbackApiUrl,
+                CallbackApiPassword = dataModel.CallbackApiPassword,
+                CallbackApiUsername = dataModel.CallbackApiUsername,
             };
         }
     }

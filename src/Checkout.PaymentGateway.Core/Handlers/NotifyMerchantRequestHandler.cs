@@ -26,11 +26,13 @@ namespace Checkout.PaymentGateway.Core.Handlers
 
             if (merchant == null) throw new InvalidOperationException("Merchant not found.");
 
-            if (merchant.PaymentStatusCallbackUrl != null)
+            if (merchant.CallbackApiUrl != null)
             {
                 var notifyRequest = new Outgoing.NotifyMerchantRequest
                 {
-                    CallbackUrl = merchant.PaymentStatusCallbackUrl,
+                    CallbackUrl = merchant.CallbackApiUrl,
+                    CallbackApiPassword = merchant.CallbackApiPassword,
+                    CallbackApiUsername = merchant.CallbackApiUsername,
                     PaymentId = request.PaymentId,
                     PaymentStatus = request.PaymentStatus,
                     ProcessorTransactionId = request.ProcessorTransactionId

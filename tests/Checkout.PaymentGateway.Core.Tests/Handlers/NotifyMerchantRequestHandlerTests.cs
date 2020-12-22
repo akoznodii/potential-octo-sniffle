@@ -50,7 +50,9 @@ namespace Checkout.PaymentGateway.Core.Tests.Handlers
             await _handler.Handle(incomingRequest, CancellationToken.None);
 
             _notifierMock.Verify(m => m.Notify(It.Is<Outgoing.NotifyMerchantRequest>(request =>
-                request.CallbackUrl == merchant.PaymentStatusCallbackUrl &&
+                request.CallbackUrl == merchant.CallbackApiUrl &&
+                request.CallbackApiPassword == merchant.CallbackApiPassword &&
+                request.CallbackApiUsername == merchant.CallbackApiUsername &&
                 request.PaymentStatus == incomingRequest.PaymentStatus &&
                 request.PaymentId == incomingRequest.PaymentId),
                 It.IsAny<CancellationToken>()), Times.Once);
