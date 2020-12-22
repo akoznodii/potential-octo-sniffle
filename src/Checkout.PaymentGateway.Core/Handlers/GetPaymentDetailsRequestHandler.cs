@@ -31,6 +31,7 @@ namespace Checkout.PaymentGateway.Core.Handlers
                 Currency = payment.Currency,
                 Status = payment.Status.ToString("G"),
                 MerchantId = payment.MerchantId.ToString(),
+                CreditCardType = payment.CreditCard.CardType,
                 CreditCardNumber = payment.CreditCard.MaskedCardNumber,
                 CreditCardExpiryDate = payment.CreditCard.ExpiryDate,
                 ProcessorTransactionId = payment.Transaction?.Id,

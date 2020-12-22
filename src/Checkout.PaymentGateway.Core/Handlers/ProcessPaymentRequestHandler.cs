@@ -25,15 +25,16 @@ namespace Checkout.PaymentGateway.Core.Handlers
 
             var payment = new Payment
             {
-                MerchantId = request.MerchantId,
+                MerchantId = Guid.Parse(request.MerchantId),
                 Amount = request.Amount,
-                Currency = request.Currency,
+                Currency = request.Currency.ToUpper(),
                 Status = PaymentStatus.Initial,
                 CreditCard = new CreditCard
                 {
                     CardNumber = request.CardNumber,
                     ExpiryMonth = request.ExpiryMonth,
-                    ExpiryYear = request.ExpiryYear
+                    ExpiryYear = request.ExpiryYear,
+                    CardType =  request.CardType.ToUpper()
                 }
             };
 
@@ -44,6 +45,7 @@ namespace Checkout.PaymentGateway.Core.Handlers
                 PaymentId = payment.Id,
                 Amount = request.Amount,
                 Currency = request.Currency,
+                CardType = request.CardType,
                 CardNumber = request.CardNumber,
                 CvvNumber = request.CvvNumber,
                 ExpiryMonth = request.ExpiryMonth,

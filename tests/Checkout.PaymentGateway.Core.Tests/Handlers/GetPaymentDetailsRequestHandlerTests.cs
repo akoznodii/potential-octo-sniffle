@@ -53,6 +53,7 @@ namespace Checkout.PaymentGateway.Core.Tests.Handlers
             response.Currency.Should().Be(payment.Currency);
             response.Id.Should().Be(payment.Id.ToString());
             response.Status.Should().Be(payment.Status.ToString("G"));
+            response.CreditCardType.Should().Be(payment.CreditCard.CardType);
             response.CreditCardNumber.Should().Be(payment.CreditCard.MaskedCardNumber);
             response.CreditCardExpiryDate.Should().Be(payment.CreditCard.ExpiryDate);
         }

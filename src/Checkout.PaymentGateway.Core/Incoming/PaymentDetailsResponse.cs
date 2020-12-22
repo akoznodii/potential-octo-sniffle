@@ -14,6 +14,8 @@
 
         public string ProcessorTransactionStatus { get; set; }
 
+        public string CreditCardType { get; set; }
+
         public string CreditCardNumber { get; set; }
 
         public string CreditCardExpiryDate { get; set; }
