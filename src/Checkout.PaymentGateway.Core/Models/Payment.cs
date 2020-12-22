@@ -17,5 +17,7 @@ namespace Checkout.PaymentGateway.Core.Models
         public CreditCard CreditCard { get; set; }
 
         public PaymentStatus Status { get; set; }
+
+        public object Timestamp { get; set; }
     }
 }

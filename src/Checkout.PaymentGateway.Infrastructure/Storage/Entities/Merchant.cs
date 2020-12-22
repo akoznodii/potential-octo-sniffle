@@ -1,10 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Checkout.PaymentGateway.Core.Models;
 
 namespace Checkout.PaymentGateway.Infrastructure.Storage.Entities
 {
-    public class Merchant
+    public class Merchant : IEntity<Guid>
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -13,10 +14,6 @@ namespace Checkout.PaymentGateway.Infrastructure.Storage.Entities
         public string PaymentStatusCallbackUrl { get; set; }
 
         public string ApiKeyId { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-
-        public DateTime UpdatedAt { get; set; }
 
         [Timestamp]
         public byte[] Timestamp { get; set; }

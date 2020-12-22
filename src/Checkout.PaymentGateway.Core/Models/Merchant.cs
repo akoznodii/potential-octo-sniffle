@@ -7,5 +7,9 @@ namespace Checkout.PaymentGateway.Core.Models
         public Guid Id { get; set; }
 
         public string PaymentStatusCallbackUrl { get; set; }
+
+        public string ApiKeyId { get; set; }
+
+        public object Timestamp { get; set; }
     }
 }

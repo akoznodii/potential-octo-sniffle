@@ -5,7 +5,7 @@ using Checkout.PaymentGateway.Core.Models;
 
 namespace Checkout.PaymentGateway.Infrastructure.Storage.Entities
 {
-    public class Payment
+    public class Payment : IEntity<Guid>
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -27,15 +27,11 @@ namespace Checkout.PaymentGateway.Infrastructure.Storage.Entities
 
         public string CreditCardNumber { get; set; }
 
-        public int CreditExpiryMonth { get; set; }
+        public int CreditCardExpiryMonth { get; set; }
 
-        public int CreditExpiryYear { get; set; }
+        public int CreditCardExpiryYear { get; set; }
 
         public PaymentStatus Status { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-
-        public DateTime UpdatedAt { get; set; }
 
         public Merchant Merchant { get; set; }
 
