@@ -1,6 +1,6 @@
 ﻿namespace Checkout.PaymentGateway.Infrastructure.Processor
 {
-    public class FakePaymentProcessorOptions
+    public class PaymentProcessorOptions
     {
         public string Url { get; set; }
 

@@ -16,8 +16,8 @@ namespace Checkout.PaymentGateway.Infrastructure.Repositories
             return new Storage.Entities.Merchant
             {
                 Id = domainModel.Id,
+                DisplayName = domainModel.DisplayName,
                 Timestamp = domainModel.Timestamp as byte[],
-                ApiKeyId = domainModel.ApiKeyId,
                 CallbackApiUrl = domainModel.CallbackApiUrl,
                 CallbackApiPassword = domainModel.CallbackApiPassword,
                 CallbackApiUsername = domainModel.CallbackApiUsername,
@@ -29,8 +29,8 @@ namespace Checkout.PaymentGateway.Infrastructure.Repositories
             return new Merchant
             {
                 Id = dataModel.Id,
+                DisplayName = dataModel.DisplayName,
                 Timestamp = dataModel.Timestamp,
-                ApiKeyId = dataModel.ApiKeyId,
                 CallbackApiUrl = dataModel.CallbackApiUrl,
                 CallbackApiPassword = dataModel.CallbackApiPassword,
                 CallbackApiUsername = dataModel.CallbackApiUsername,

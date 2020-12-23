@@ -1,0 +1,14 @@
+version: '3'
+services: 
+    sqlserver:
+        image: mcr.microsoft.com/mssql/server:2017-CU14-ubuntu
+        environment:
+          - "ACCEPT_EULA=Y"
+          - "SA_PASSWORD=PG12345!"
+        ports:
+          - 11433:1433
+        volumes:
+          - sqlvolume:/var/opt/mssql
+volumes: 
+    sqlvolume:
+      driver: local

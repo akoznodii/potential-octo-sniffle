@@ -5,6 +5,8 @@ using Checkout.PaymentGateway.Core.Models;
 
 namespace Checkout.PaymentGateway.Infrastructure.Storage.Entities
 {
+
+    [Table("Payments", Schema = ApplicationContext.DefaultSchema)]
     public class Payment : IEntity<Guid>
     {
         [Key]

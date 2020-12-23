@@ -5,7 +5,7 @@ namespace Checkout.PaymentGateway.Infrastructure.Storage
 {
     public class ApplicationContext : DbContext
     {
-        public static string DefaultSchema { get; set; } = "gateway";
+        public const string DefaultSchema = "gateway";
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)

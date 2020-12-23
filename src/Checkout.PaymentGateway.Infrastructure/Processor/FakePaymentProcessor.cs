@@ -14,9 +14,9 @@ namespace Checkout.PaymentGateway.Infrastructure.Processor
 {
     public class FakePaymentProcessor : IPaymentProcessor
     {
-        private readonly IOptionsSnapshot<FakePaymentProcessorOptions> _options;
+        private readonly IOptionsSnapshot<PaymentProcessorOptions> _options;
 
-        public FakePaymentProcessor(IOptionsSnapshot<FakePaymentProcessorOptions> options)
+        public FakePaymentProcessor(IOptionsSnapshot<PaymentProcessorOptions> options)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
         }
