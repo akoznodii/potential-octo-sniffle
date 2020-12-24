@@ -13,7 +13,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.PaymentGateway.Cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.PaymentGateway.Infrastructure", "src\Checkout.PaymentGateway.Infrastructure\Checkout.PaymentGateway.Infrastructure.csproj", "{D73D3BD6-01F0-4E09-B349-02BADB844C05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.PaymentGateway.Api", "src\Checkout.PaymentGateway.Api\Checkout.PaymentGateway.Api.csproj", "{891CBE00-07D8-4863-B85E-F8C6AEB4122A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.PaymentGateway.Api", "src\Checkout.PaymentGateway.Api\Checkout.PaymentGateway.Api.csproj", "{891CBE00-07D8-4863-B85E-F8C6AEB4122A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mocks", "mocks", "{9EF73500-E632-4C9A-BD22-00E99D39ECCC}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{DB526B73-5E02-4066-B3AA-8C691FE8DDB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.MerchantMock.Api", "mocks\Checkout.MerchantMock.Api\Checkout.MerchantMock.Api.csproj", "{CF8717B1-8AA0-486B-8818-E1EEBD142A94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.PaymentProcessorMock.Api", "mocks\Checkout.PaymentProcessorMock.Api\Checkout.PaymentProcessorMock.Api.csproj", "{0462DA15-44CD-44CD-B0E2-CD7DAB111AE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +45,18 @@ Global
 		{891CBE00-07D8-4863-B85E-F8C6AEB4122A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{891CBE00-07D8-4863-B85E-F8C6AEB4122A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{891CBE00-07D8-4863-B85E-F8C6AEB4122A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB526B73-5E02-4066-B3AA-8C691FE8DDB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB526B73-5E02-4066-B3AA-8C691FE8DDB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB526B73-5E02-4066-B3AA-8C691FE8DDB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB526B73-5E02-4066-B3AA-8C691FE8DDB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF8717B1-8AA0-486B-8818-E1EEBD142A94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF8717B1-8AA0-486B-8818-E1EEBD142A94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF8717B1-8AA0-486B-8818-E1EEBD142A94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF8717B1-8AA0-486B-8818-E1EEBD142A94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0462DA15-44CD-44CD-B0E2-CD7DAB111AE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0462DA15-44CD-44CD-B0E2-CD7DAB111AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0462DA15-44CD-44CD-B0E2-CD7DAB111AE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0462DA15-44CD-44CD-B0E2-CD7DAB111AE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +66,8 @@ Global
 		{D40679ED-0110-4DAC-A33E-A49A8F293F1E} = {922FD879-F41F-4A14-9B97-AB09FCFF2D2A}
 		{D73D3BD6-01F0-4E09-B349-02BADB844C05} = {0BAF11C9-A3CE-4E96-9E32-23A3DB350F32}
 		{891CBE00-07D8-4863-B85E-F8C6AEB4122A} = {0BAF11C9-A3CE-4E96-9E32-23A3DB350F32}
+		{CF8717B1-8AA0-486B-8818-E1EEBD142A94} = {9EF73500-E632-4C9A-BD22-00E99D39ECCC}
+		{0462DA15-44CD-44CD-B0E2-CD7DAB111AE5} = {9EF73500-E632-4C9A-BD22-00E99D39ECCC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16DDE1A7-964B-4556-A8A3-EC75E8FB7E98}

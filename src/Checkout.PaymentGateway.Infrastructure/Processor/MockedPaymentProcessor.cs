@@ -6,19 +6,22 @@ using Checkout.PaymentGateway.Core.Models;
 using Checkout.PaymentGateway.Core.Outgoing;
 using Checkout.PaymentGateway.Core.Ports;
 using Checkout.PaymentGateway.Infrastructure.Processor.Models;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RestSharp;
 using RestSharp.Authenticators;
 
 namespace Checkout.PaymentGateway.Infrastructure.Processor
 {
-    public class FakePaymentProcessor : IPaymentProcessor
+    public class MockedPaymentProcessor : IPaymentProcessor
     {
+        private readonly ILogger<MockedPaymentProcessor> _logger;
         private readonly IOptionsSnapshot<PaymentProcessorOptions> _options;
 
-        public FakePaymentProcessor(IOptionsSnapshot<PaymentProcessorOptions> options)
+        public MockedPaymentProcessor(IOptionsSnapshot<PaymentProcessorOptions> options, ILogger<MockedPaymentProcessor> logger)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public async Task<ProcessPaymentResponse> Process(ProcessPaymentRequest request, CancellationToken cancellationToken)
@@ -39,18 +42,28 @@ namespace Checkout.PaymentGateway.Infrastructure.Processor
                 CardType = request.CardType,
                 CvvNumber = request.CvvNumber,
                 ExpiryDate = $"{request.ExpiryMonth}/{request.ExpiryYear % 100}",
-                ExternalTransactionId = request.PaymentId.ToString("G")
+                ExternalTransactionId = request.PaymentId.ToString("N")
             });
 
-            var outgoingResponse = await client.PostAsync<PaymentResponse>(outgoingRequest, cancellationToken);
+            var status = PaymentStatus.Initial;
+            PaymentResponse outgoingResponse = null;
 
-            var status = MapStatus(outgoingResponse.Status);
+            try
+            {
+                outgoingResponse = await client.PostAsync<PaymentResponse>(outgoingRequest, cancellationToken);
+                status = MapStatus(outgoingResponse.Status);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical(ex, "Failed to forward a payment process request {PaymentId}", request.PaymentId);
+                status = PaymentStatus.Failed;
+            }
 
             return new ProcessPaymentResponse
             {
                 MappedStatus = status,
-                RawStatus = outgoingResponse.Status,
-                TransactionId = outgoingResponse.Id
+                RawStatus = outgoingResponse?.Status,
+                TransactionId = outgoingResponse?.Id
             };
         }
 

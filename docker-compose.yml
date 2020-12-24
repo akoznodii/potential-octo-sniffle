@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  checkout.fakepaymentprocessor:
+    image: ${DOCKER_REGISTRY-}checkoutfakepaymentprocessor
+    build:
+      context: .
+      dockerfile: mocks/Checkout.FakePaymentProcessor/Dockerfile

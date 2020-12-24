@@ -17,7 +17,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddPaymentGateway(this IServiceCollection services, IConfiguration configuration)
         {
-            return services.AddScoped<IPaymentProcessor, FakePaymentProcessor>()
+            return services.AddScoped<IPaymentProcessor, MockedPaymentProcessor>()
                 .AddScoped<IMerchantNotifier, MerchantNotifier>()
                 .AddScoped<IMerchantRepository, MerchantRepository>()
                 .AddScoped<IPaymentRepository, PaymentRepository>()

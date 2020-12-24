@@ -2,21 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyModel;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
-using Serilog.Core;
-using Serilog.Events;
-using Serilog.Formatting;
 using Serilog.Formatting.Compact;
-using Serilog.Formatting.Json;
 
-namespace Checkout.PaymentGateway.Api
+namespace Checkout.PaymentProcessorMock.Api
 {
     public class Program
     {
@@ -67,10 +61,7 @@ namespace Checkout.PaymentGateway.Api
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.
-                        UseConfiguration(Configuration)
-                        .UseStartup<Startup>()
-                        .UseSerilog();
+                    webBuilder.UseStartup<Startup>();
                 });
     }
 }

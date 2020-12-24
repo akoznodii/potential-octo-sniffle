@@ -6,7 +6,7 @@ using Checkout.PaymentGateway.Core.Models;
 namespace Checkout.PaymentGateway.Infrastructure.Storage.Entities
 {
     [Table("Merchants", Schema = ApplicationContext.DefaultSchema)]
-    public class Merchant : IEntity<Guid>
+    public class Merchant : IEntity<Guid>, IWithTimestamp
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

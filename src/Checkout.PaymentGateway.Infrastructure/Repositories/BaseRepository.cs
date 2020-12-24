@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Checkout.PaymentGateway.Core.Models;
 using Checkout.PaymentGateway.Core.Ports;
 using Checkout.PaymentGateway.Infrastructure.Storage;
+using Checkout.PaymentGateway.Infrastructure.Storage.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Checkout.PaymentGateway.Infrastructure.Repositories
@@ -27,6 +28,12 @@ namespace Checkout.PaymentGateway.Infrastructure.Repositories
 
             await Context.Set<TDataModel>().AddAsync(data);
             await Context.SaveChangesAsync();
+
+            Context.Entry(data).State = EntityState.Detached;
+
+            entity.Id = data.Id;
+
+            SetTimestamp(data, entity);
         }
 
         public async Task Update(TDomainModel entity)
@@ -37,6 +44,10 @@ namespace Checkout.PaymentGateway.Infrastructure.Repositories
 
             Context.Set<TDataModel>().Update(data);
             await Context.SaveChangesAsync();
+
+            Context.Entry(data).State = EntityState.Detached;
+
+            SetTimestamp(data, entity);
         }
 
         public async Task<TDomainModel> GetById(TId id)
@@ -49,5 +60,14 @@ namespace Checkout.PaymentGateway.Infrastructure.Repositories
         protected abstract TDataModel MapToData(TDomainModel domainModel);
 
         protected abstract TDomainModel MapToDomain(TDataModel dataModel);
+
+        private void SetTimestamp(TDataModel data, TDomainModel entity)
+        {
+            if (data is IWithTimestamp dataWithTimestamp &&
+                entity is ITrackable trackable)
+            {
+                trackable.Timestamp = dataWithTimestamp.Timestamp;
+            }
+        }
     }
 }

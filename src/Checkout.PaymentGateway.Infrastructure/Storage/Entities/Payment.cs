@@ -7,7 +7,7 @@ namespace Checkout.PaymentGateway.Infrastructure.Storage.Entities
 {
 
     [Table("Payments", Schema = ApplicationContext.DefaultSchema)]
-    public class Payment : IEntity<Guid>
+    public class Payment : IEntity<Guid>, IWithTimestamp
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

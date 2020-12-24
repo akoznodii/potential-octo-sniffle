@@ -2,7 +2,7 @@
 
 namespace Checkout.PaymentGateway.Core.Models
 {
-    public class Merchant : IEntity<Guid>
+    public class Merchant : IEntity<Guid>, ITrackable
     {
         public Guid Id { get; set; }
 
