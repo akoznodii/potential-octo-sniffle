@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Checkout.PaymentProcessorMock.Api.Models;
 using Checkout.PaymentProcessorMock.Api.Options;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -9,6 +10,7 @@ using RestSharp;
 
 namespace Checkout.PaymentProcessorMock.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/payments")]
     public class PaymentController : ControllerBase
@@ -48,6 +50,7 @@ namespace Checkout.PaymentProcessorMock.Api.Controllers
         private void MakeCallback(string id, string status)
         {
             var url = _options.Value.Url;
+            var apiKey = _options.Value.ApiKey;
 
             _logger.LogInformation("Invoking webhook url: {Url}", url);
             var client = new RestClient();
@@ -60,6 +63,7 @@ namespace Checkout.PaymentProcessorMock.Api.Controllers
                 TransactionStatus = status
             };
 
+            request.AddHeader("x-api-key", apiKey);
             request.AddJsonBody(body);
 
             var response = client.Execute(request);

@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using AspNetCore.Authentication.ApiKey;
 using Checkout.PaymentProcessorMock.Api.Options;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +28,25 @@ namespace Checkout.PaymentProcessorMock.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(ApiKeyDefaults.AuthenticationScheme)
+                .AddApiKeyInHeaderOrQueryParams(options =>
+                {
+                    options.KeyName = "x-fake-pp-api-key";
+                    options.SuppressWWWAuthenticateHeader = true;
+                    options.Events = new ApiKeyEvents
+                    {
+                        OnValidateKey = context =>
+                        {
+                            if (context.ApiKey == Configuration.GetValue<string>("ApiKey"))
+                            {
+                                context.ValidationSucceeded("PaymentGateway");
+                            }
+
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
+
             services.AddControllers();
 
             services.Configure<PaymentGatewayOptions>(Configuration.GetSection("PaymentGateway"));
@@ -47,6 +69,7 @@ namespace Checkout.PaymentProcessorMock.Api
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

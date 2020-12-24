@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using AspNetCore.Authentication.Basic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,13 +26,26 @@ namespace Checkout.MerchantMock.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddAuthentication()
+                .AddBasic(options =>
+                {
+                    options.Events = new BasicEvents
+                    {
+                        OnValidateCredentials = context =>
+                        {
+                            if (context.Username == Configuration.GetValue<string>("Credentials:Username") &&
+                                context.Password == Configuration.GetValue<string>("Credentials:Password"))
+                            {
+                                context.ValidationSucceeded(new[]
+                                    {new Claim(ClaimTypes.NameIdentifier, "PaymentGateway")});
+                            }
 
-            services.AddSwaggerGen(options =>
-            {
-                options.DescribeAllParametersInCamelCase();
-                options.EnableAnnotations();
-            });
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
+
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -44,6 +59,7 @@ namespace Checkout.MerchantMock.Api
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

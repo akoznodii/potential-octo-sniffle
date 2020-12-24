@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Checkout.MerchantMock.Api.Models;
+﻿using Checkout.MerchantMock.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 

@@ -15,5 +15,7 @@ namespace Checkout.PaymentGateway.Infrastructure.Storage
         public DbSet<Payment> Payments { get; set; }
 
         public DbSet<Merchant> Merchants { get; set; }
+
+        public DbSet<Client> Clients { get; set; }
     }
 }

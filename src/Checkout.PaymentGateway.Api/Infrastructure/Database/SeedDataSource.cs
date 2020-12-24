@@ -6,5 +6,7 @@ namespace Checkout.PaymentGateway.Api.Infrastructure
     public class SeedDataSource
     {
         public IList<Merchant> Merchants { get; set; }
+
+        public IList<Client> Clients { get; set; }
     }
 }

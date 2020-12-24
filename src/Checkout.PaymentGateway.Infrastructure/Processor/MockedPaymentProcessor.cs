@@ -28,10 +28,7 @@ namespace Checkout.PaymentGateway.Infrastructure.Processor
         {
             var options = _options.Value;
 
-            var client = new RestClient()
-            {
-                Authenticator = new HttpBasicAuthenticator(options.Username, options.Password, Encoding.UTF8)
-            };
+            var client = new RestClient();
 
             // Assume that Fake Payment Processor has its own API and Contracts provided for use
             var outgoingRequest = new JsonRequest<PaymentRequest, PaymentResponse>(options.Url, new PaymentRequest
@@ -44,6 +41,8 @@ namespace Checkout.PaymentGateway.Infrastructure.Processor
                 ExpiryDate = $"{request.ExpiryMonth}/{request.ExpiryYear % 100}",
                 ExternalTransactionId = request.PaymentId.ToString("N")
             });
+
+            outgoingRequest.AddHeader("x-fake-pp-api-key", options.ApiKey);
 
             var status = PaymentStatus.Initial;
             PaymentResponse outgoingResponse = null;

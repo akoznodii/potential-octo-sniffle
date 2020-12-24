@@ -1,8 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using AspNetCore.Authentication.ApiKey;
 using Checkout.PaymentGateway.Api.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Checkout.PaymentGateway.Api
@@ -27,6 +32,14 @@ namespace Checkout.PaymentGateway.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(ApiKeyDefaults.AuthenticationScheme)
+                .AddApiKeyInHeaderOrQueryParams<ApiKeyProvider>(options =>
+                {
+                    options.KeyName = "x-api-key";
+                    options.SuppressWWWAuthenticateHeader = true;
+                });
+            services.AddScoped<IApiKeyProvider, ApiKeyProvider>();
+
             services.AddControllers();
 
             services.AddApiVersioning(options =>
@@ -43,8 +56,36 @@ namespace Checkout.PaymentGateway.Api
 
             services.AddSwaggerGen(options =>
             {
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
                 options.DescribeAllParametersInCamelCase();
                 options.EnableAnnotations();
+                options.IncludeXmlComments(xmlPath);
+                options.AddSecurityDefinition(ApiKeyDefaults.AuthenticationScheme, new OpenApiSecurityScheme
+                {
+                    Description = "Api key needed to access the endpoints. x-api-key: KEY",
+                    In = ParameterLocation.Header,
+                    Name = "x-api-key",
+                    Type = SecuritySchemeType.ApiKey
+                });
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Name = "x-api-key",
+                            Type = SecuritySchemeType.ApiKey,
+                            In = ParameterLocation.Header,
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = ApiKeyDefaults.AuthenticationScheme
+                            },
+                        },
+                        new string[] {}
+                    }
+                });
             });
 
             services.AddPaymentGateway(Configuration);
@@ -63,6 +104,7 @@ namespace Checkout.PaymentGateway.Api
             }
 
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {

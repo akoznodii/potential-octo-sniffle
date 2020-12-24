@@ -48,6 +48,19 @@ namespace Checkout.PaymentGateway.Api.Infrastructure
                     context.SaveChanges();
                 }
             }
+
+            if (data.Clients != null)
+            {
+                var names = data.Clients.Select(c => c.Name).ToList();
+                var existingNames = context.Clients.Where(c => names.Contains(c.Name)).Select(t => t.Name).ToList();
+                var range = data.Clients.Where(c => !existingNames.Contains(c.Name)).ToList();
+
+                if (range.Any())
+                {
+                    context.Clients.AddRange(range);
+                    context.SaveChanges();
+                }
+            }
         }
     }
 }
