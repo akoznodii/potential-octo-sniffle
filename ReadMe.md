@@ -1,10 +1,19 @@
 ### Local Development
 
-Run service dependencies:
+Setup local development by running the following commands in CMD on Windows
 
 ```
-docker-compose -f docker-compose.deps.yml up
+dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p PG12345!
+dotnet dev-certs https --trust
 ```
+
+Run PaymentGateway service dependencies:
+
+```
+docker-compose -f docker-compose.deps.yml -f docker-compose.services.yml up
+```
+
+
 
 ### Database
 

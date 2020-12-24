@@ -1,0 +1,34 @@
+version: '3.4'
+
+services:
+  checkout.paymentprocessor.mock:
+    image: ${DOCKER_REGISTRY-}checkoutpaymentprocessormock
+    build:
+      context: .
+      dockerfile: mocks/Checkout.PaymentProcessorMock.Api/Dockerfile
+    environment:
+      - PaymentGateway:Url=http://host.docker.internal:9100/webhooks/fakepp/v1/notifications
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=PG12345!
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    ports:
+      - 9200:80
+      - 9201:443
+    volumes:
+      - ~/.aspnet/https:/https:ro
+  checkout.merchant.mock:
+    image: ${DOCKER_REGISTRY-}checkoutmerchantmock
+    build:
+      context: .
+      dockerfile: mocks/Checkout.MerchantMock.Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=PG12345!
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    ports:
+      - 9300:80
+      - 9301:443
+    volumes:
+      - ~/.aspnet/https:/https:ro
