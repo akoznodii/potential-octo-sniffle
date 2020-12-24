@@ -35,7 +35,7 @@ namespace Checkout.PaymentProcessorMock.Api.Controllers
             {
                 var status = GetStatus(request);
 
-                _logger.LogInformation("Complete processing payment request: {RequestId} with {Result}", request.ExternalTransactionId, status);
+                _logger.LogInformation("Complete processing payment request: {RequestId} with {Result} result", request.ExternalTransactionId, status);
 
                 MakeCallback(id, status);
             });

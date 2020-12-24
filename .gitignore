@@ -4,7 +4,6 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 /.idea
-/mocks/Checkout.PaymentProcessorMock.Api/App_Data/log.json
-/src/Checkout.PaymentGateway.Api/App_Data/log.json
+**/App_Data/log.json
 /.vs/PaymentGateway/DesignTimeBuild/.dtbcache.v2
 /.vs/PaymentGateway/v16/.suo

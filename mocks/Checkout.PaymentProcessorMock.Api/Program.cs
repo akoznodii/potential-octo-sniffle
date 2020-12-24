@@ -35,7 +35,7 @@ namespace Checkout.PaymentProcessorMock.Api
                 .Enrich.WithMachineName()
                 .Enrich.WithExceptionData()
                 .WriteTo.File(new RenderedCompactJsonFormatter(), "App_Data/log.json")
-                .WriteTo.ColoredConsole();
+                .WriteTo.Console();
 
             Log.Logger = loggerConfiguration.CreateLogger();
 

@@ -42,7 +42,7 @@ namespace Checkout.PaymentGateway.Core.Handlers
                 payment.Status = status;
                 payment.Transaction = new PaymentProcessorTransaction
                 {
-                    Id = request.RawStatus,
+                    Id = request.TransactionId,
                     Status = request.RawStatus
                 };
 
