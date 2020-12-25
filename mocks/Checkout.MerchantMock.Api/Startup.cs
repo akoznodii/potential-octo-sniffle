@@ -46,6 +46,12 @@ namespace Checkout.MerchantMock.Api
                 });
 
             services.AddControllers();
+
+            services.AddSwaggerGen(options =>
+            {
+                options.DescribeAllParametersInCamelCase();
+                options.EnableAnnotations();
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
