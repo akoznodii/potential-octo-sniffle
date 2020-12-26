@@ -134,6 +134,7 @@ Mocked PaymentProcessor API responds differently by inspecting CVV value of a pa
 * Use Retry Policy when handling webhook callbacks from PaymentProcessor API. It will help to handle a race condition issue with updating the status of a particular payment.
 * Replace in-process event notification with out-of-process message broker
 * Apply better authentication scheme
+* Add integration tests
 
 
 ### Database
